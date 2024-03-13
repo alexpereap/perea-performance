@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  cms:
+    build:
+      context: ../cms
+    hostname: dev.cms
+    env_file:
+      - ./env-files/cms.env
+    volumes:
+      - ../cms:/app
+    ports:
+      - "8080:3000"
+
+  database:
+    image: mariadb:11.3.2
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - db-volume:/var/lib/mysql
+      - ./database/scripts/:/docker-entrypoint-initdb.d/
+    ports:
+      - "3306:3306"
+
+volumes:
+  db-volume:
