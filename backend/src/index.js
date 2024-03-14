@@ -7,7 +7,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/envs', (req, res) => {
-  res.send(process.env.RDS_HOST)
+  res.send(process.env.RDS_DB_NAME)
 })
 
 app.listen(port, () => {
