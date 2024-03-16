@@ -4,3 +4,4 @@ COPY package*.json /
 RUN npm install
 EXPOSE 3001/tcp
 CMD ["npm", "run", "dev"]
+# CMD ["npm", "run", "start-debug"]

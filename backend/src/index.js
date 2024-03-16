@@ -13,7 +13,7 @@ app.use(bodyParser.json())
 app.use('/api/auth', auth)
 
 app.get('/', (req, res) => {
-  res.send('The backend is here')
+  res.send('The backend is here3')
 })
 
 app.get('/envs', (req, res) => {
@@ -21,5 +21,5 @@ app.get('/envs', (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Backend app listening on port ${port}`)
 })
