@@ -18,8 +18,22 @@ const login = async (req, res) => {
             return authFailed(res)
         }
 
-        res.send(`User found ${user.id}`)
-        // TODO login flow
+        // authentication
+        let jwtToken = jwt.sign(
+            {
+                userId: user.id,
+                username,
+            },
+            process.env.JWT_SECRET,
+            {
+                expiresIn: '1m'
+            }
+        )
+
+        return res.status(200).json({
+            acessToken: jwtToken,
+            userId: user.id
+        })
 
     } catch (e) {
         return authFailed(res, e.message)
@@ -27,7 +41,6 @@ const login = async (req, res) => {
 }
 
 const register = async (req, res) => {
-    // TODO SAFEGUARD this route
     try {
         const {username, password} = req.body
 
@@ -78,6 +91,10 @@ const register = async (req, res) => {
     }
 }
 
+const testAuth = (req, res) => {
+    res.send('Auth ok')
+}
+
 function authFailed(res, error) {
     let response = {
         message: 'Authentication Failed',
@@ -92,5 +109,6 @@ function authFailed(res, error) {
 
 module.exports = {
     login,
-    register
+    register,
+    testAuth,
 }
