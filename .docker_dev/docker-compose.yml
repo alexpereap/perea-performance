@@ -11,6 +11,7 @@ services:
       - ../cms:/app
     ports:
       - "8080:3000"
+      - "9230:9229"
   
   backend:
     build:
@@ -21,7 +22,7 @@ services:
     volumes:
       - ../backend:/app
     ports:
-      - "8081:3001"
+      - "80:3001"
       - "9229:9229"
 
   database:

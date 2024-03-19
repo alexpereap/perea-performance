@@ -17,6 +17,20 @@
             "address": "localhost",
             "remoteRoot": "/app",
             "localRoot": "${workspaceFolder}/backend"
+        },
+        {
+            "name": "CMS-Docker: Attach to Node",
+            "type": "node",
+            "request": "attach",
+            "port": 9230,
+            "skipFiles": [
+                "${workspaceFolder}/app/node_modules/**/*.js",
+                "<node_internals>/**"
+            ],
+            "restart": true,
+            "address": "localhost",
+            "remoteRoot": "/app",
+            "localRoot": "${workspaceFolder}/cms"
         }
     ]
 }
