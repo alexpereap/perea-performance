@@ -1,7 +1,7 @@
 const home = (req, res) => {
-  res.send('home page');
-}
+  res.render('login');
+};
 
 module.exports = {
-  home
-}
+  home,
+};
