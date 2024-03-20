@@ -22,12 +22,13 @@ app.use(express.static(`${__dirname}/public`));
 // setup express-session
 app.use(
   session({
+    name: 'perea-performance-sess',
     secret: 'secret',
     resave: false,
     saveUninitialized: true,
     cookie: {
       maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
-      // secure: true,
+      secure: process.env.NODE_ENV === 'production',
     },
   }),
 );

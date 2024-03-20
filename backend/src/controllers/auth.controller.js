@@ -24,12 +24,12 @@ const login = async (req, res) => {
       },
       process.env.JWT_SECRET,
       {
-        expiresIn: '1m',
+        expiresIn: '7d',
       },
     );
 
     return res.status(200).json({
-      acessToken: jwtToken,
+      accessToken: jwtToken,
       userId: user.id,
     });
   } catch (e) {
@@ -87,9 +87,10 @@ const register = async (req, res) => {
   }
 };
 
-const testAuth = (req, res) => {
-  res.send('Auth ok');
-};
+const isAuthorized = (req, res) => res.status(201).json({
+  message: 'authorized',
+  success: true,
+});
 
 function authFailed(res, error) {
   const response = {
@@ -106,5 +107,5 @@ function authFailed(res, error) {
 module.exports = {
   login,
   register,
-  testAuth,
+  isAuthorized,
 };

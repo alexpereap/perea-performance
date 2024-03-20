@@ -2,11 +2,17 @@ const axios = require('axios');
 
 const home = (req, res) => {
   let loginError = '';
+
+  // sets flash error
   if (typeof (req.session.loginError) !== 'undefined') {
     loginError = req.session.loginError;
-    console.log(loginError);
     delete req.session.loginError;
   }
+  // goes to dashboard if an access token is available
+  if (typeof req.session.accessToken !== 'undefined') {
+    res.redirect('/dashboard');
+  }
+
   res.render('login', { loginError });
 };
 
@@ -14,19 +20,22 @@ const login = async (req, res) => {
   try {
     const { username, password } = req.body;
     const response = await axios.post(
-      'http://pereaperformance.local/api/auth/login',
+      `${process.env.BACKEND_URL}/api/auth/login`,
       {
         username,
         password,
       },
     );
 
-    // TODO complete login
-    console.log(response);
-    res.send('trying to login');
+    // stores access token into the session
+    const { accessToken } = response.data;
+    req.session.accessToken = accessToken;
+
+    // goes to dashboard
+    res.redirect('/dashboard');
   } catch (e) {
     let errMsg = `Unexpected error occured: ${e.message}`;
-    if (e.response.status === 401) {
+    if (e.hasOwnProperty('response') && e.response.status === 401) {
       errMsg = 'Wrong username or password';
     }
 
