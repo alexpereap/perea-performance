@@ -25,6 +25,11 @@ class ResponseErrors {
     error: e.message,
     success: false,
   });
+
+  static error404 = (res) => res.status(404).json({
+    message: 'Not found',
+    success: false,
+  });
 }
 
 module.exports = ResponseErrors;

@@ -18,7 +18,23 @@ const getAll = async (req, res) => {
   }
 };
 
-// TODO get and delete
+const getOne = async (req, res) => {
+  try {
+    const { homeSlideId } = req.params;
+    const homeSlide = await HomeSlide.findByPk(homeSlideId);
+
+    if (!homeSlide) {
+      return ResponseErrors.error404(res);
+    }
+
+    return res.status(201).json({
+      data: homeSlide,
+      success: true,
+    });
+  } catch (e) {
+    return ResponseErrors.error500(res, e);
+  }
+};
 
 const insert = async (req, res) => {
   try {
@@ -99,8 +115,34 @@ const update = async (req, res) => {
   }
 };
 
+const deleteRecord = async (req, res) => {
+  try {
+    const { homeSlideId } = req.params;
+    const homeSlide = await HomeSlide.findByPk(homeSlideId);
+
+    if (!homeSlide) {
+      return ResponseErrors.error404(res);
+    }
+
+    const result = await homeSlide.destroy();
+
+    if (!result) {
+      throw new Error('Unable to delete record');
+    }
+
+    return res.status(201).json({
+      message: 'Record deleted successfully',
+      success: true,
+    });
+  } catch (e) {
+    return ResponseErrors.error500(res, e);
+  }
+};
+
 module.exports = {
   getAll,
   insert,
   update,
+  getOne,
+  deleteRecord,
 };
