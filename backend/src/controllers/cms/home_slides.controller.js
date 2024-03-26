@@ -80,7 +80,7 @@ const update = async (req, res) => {
     // get existing record
     const homeSlide = await HomeSlide.findByPk(homeSlideId);
     if (!homeSlide) {
-      return ResponseErrors.error404('Home slide not found');
+      return ResponseErrors.error404(res);
     }
 
     if (typeof image !== 'undefined' && validator.isEmpty(image)) {
