@@ -1,4 +1,5 @@
 const homeSlidesRoutes = require('./cms/home_slides.routes');
+const singlePageRoutes = require('./cms/single_page.routes');
 
 /**
  * The `class CmsRoutes` is defining a class in JavaScript.
@@ -34,8 +35,21 @@ class CmsRoutes {
     this.app.use('/api/cms/homeslides', this.verifyToken, homeSlidesRoutes);
   };
 
+  /**
+   *
+   * @method
+   * @name singlePage
+   * @kind property
+   * @memberof CmsRoutes
+   * @returns {void}
+   */
+  singlePage = () => {
+    this.app.use('/api/cms/singlepage', this.verifyToken, singlePageRoutes);
+  };
+
   enable = () => {
     this.homeSlides();
+    this.singlePage();
   };
 }
 
