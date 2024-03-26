@@ -80,7 +80,7 @@ const update = async (req, res) => {
     // get existing record
     const homeSlide = await HomeSlide.findByPk(homeSlideId);
     if (!homeSlide) {
-      throw new Error('Home slide not found');
+      return ResponseErrors.error404('Home slide not found');
     }
 
     if (typeof image !== 'undefined' && validator.isEmpty(image)) {
@@ -101,6 +101,10 @@ const update = async (req, res) => {
 
     if (position) {
       homeSlide.position = position;
+    }
+
+    if (!homeSlide.changed()) {
+      throw new Error('Nothing is being updated in the record, make sure you are setting one of the following fields in the request: \'image\' \'legend\' \'position\'');
     }
 
     // updates model instance
