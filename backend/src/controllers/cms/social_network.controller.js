@@ -1,6 +1,7 @@
 const validator = require('validator');
-const { sequelize, DataTypes } = require('../../db');
-const SocialNetwork = require('../../models/socialnetwork')(sequelize, DataTypes);
+const db = require('../../models');
+
+const { SocialNetwork } = db;
 const ResponseErrors = require('../../utils/ResponseErrors');
 
 // allowed social network types from model

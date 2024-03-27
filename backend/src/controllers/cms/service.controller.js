@@ -1,7 +1,9 @@
 const validator = require('validator');
-const { sequelize, DataTypes } = require('../../db');
-const Service = require('../../models/service')(sequelize, DataTypes);
 const ResponseErrors = require('../../utils/ResponseErrors');
+const db = require('../../models');
+
+const { Service } = db;
+const { ServiceQuestion } = db;
 
 const getAll = async (req, res) => {
   try {
@@ -18,7 +20,11 @@ const getAll = async (req, res) => {
 const getOne = async (req, res) => {
   try {
     const { serviceId } = req.params;
-    const service = await Service.findByPk(serviceId);
+    const service = await Service.findByPk(serviceId, {
+      include: {
+        model: ServiceQuestion,
+      },
+    });
 
     if (!service) {
       return ResponseErrors.error404(res);

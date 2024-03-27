@@ -1,6 +1,7 @@
 const validator = require('validator');
-const { sequelize, DataTypes } = require('../../db');
-const HomeSlide = require('../../models/homeslide')(sequelize, DataTypes);
+const db = require('../../models');
+
+const { HomeSlide } = db;
 const ResponseErrors = require('../../utils/ResponseErrors');
 
 // allowed position values from model

@@ -1,6 +1,7 @@
 const validator = require('validator');
-const { sequelize, DataTypes } = require('../../db');
-const SinglePage = require('../../models/singlepage')(sequelize, DataTypes);
+const db = require('../../models');
+
+const { SinglePage } = db;
 const ResponseErrors = require('../../utils/ResponseErrors');
 
 const getOne = async (req, res) => {
