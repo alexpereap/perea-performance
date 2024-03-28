@@ -3,6 +3,7 @@ const singlePageRoutes = require('./cms/single_page.routes');
 const socialNetworkRoutes = require('./cms/social_network.routes');
 const serviceRoutes = require('./cms/service.routes');
 const ServieQuestionRoutes = require('./cms/service_question.routes');
+const CarRoutes = require('./cms/car.routes');
 
 /**
  * The `class CmsRoutes` is defining a class in JavaScript.
@@ -62,12 +63,17 @@ class CmsRoutes {
     this.app.use('/api/cms/service-question/', this.verifyToken, ServieQuestionRoutes);
   };
 
+  Car = () => {
+    this.app.use('/api/cms/car/', this.verifyToken, CarRoutes);
+  };
+
   enable = () => {
     this.homeSlides();
     this.singlePage();
     this.socialNetwork();
     this.service();
     this.serviceQuestion();
+    this.Car();
   };
 }
 

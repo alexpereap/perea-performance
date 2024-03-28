@@ -2,8 +2,7 @@ const validator = require('validator');
 const ResponseErrors = require('../../utils/ResponseErrors');
 const db = require('../../models');
 
-const { Service } = db;
-const { ServiceQuestion } = db;
+const { Service, ServiceQuestion } = db;
 
 const getAll = async (req, res) => {
   try {

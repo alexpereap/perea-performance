@@ -1,5 +1,5 @@
 const express = require('express');
-const SinglePage = require('../../controllers/cms/singe_page.controller');
+const SinglePage = require('../../controllers/cms/single_page.controller');
 
 const router = new express.Router();
 
