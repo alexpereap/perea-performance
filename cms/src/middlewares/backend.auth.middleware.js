@@ -20,6 +20,8 @@ module.exports = async (req, res, next) => {
     if (e.hasOwnProperty('response') && e.response.status === 401) {
       req.session.loginError = 'You are not authorized to visit this page';
     }
-    res.redirect('/');
+
+    // goes to dashboard
+    req.session.save(() => res.redirect('/'));
   }
 };

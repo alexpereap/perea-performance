@@ -7,10 +7,11 @@ const home = (req, res) => {
   if (typeof (req.session.loginError) !== 'undefined') {
     loginError = req.session.loginError;
     delete req.session.loginError;
+    req.session.save();
   }
   // goes to dashboard if an access token is available
   if (typeof req.session.accessToken !== 'undefined') {
-    res.redirect('/dashboard');
+    return res.redirect('/dashboard');
   }
 
   res.render('login', { loginError });
@@ -30,9 +31,8 @@ const login = async (req, res) => {
     // stores access token into the session
     const { accessToken } = response.data;
     req.session.accessToken = accessToken;
-
     // goes to dashboard
-    res.redirect('/dashboard');
+    req.session.save(() => res.redirect('/dashboard'));
   } catch (e) {
     let errMsg = `Unexpected error occured: ${e.message}`;
     if (e.hasOwnProperty('response') && e.response.status === 401) {
@@ -40,7 +40,8 @@ const login = async (req, res) => {
     }
 
     req.session.loginError = errMsg;
-    res.redirect('/');
+    // goes to dashboard
+    req.session.save(() => res.redirect('/'));
   }
 };
 
