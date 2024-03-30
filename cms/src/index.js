@@ -59,8 +59,8 @@ app.use(
 app.use(home);
 
 // include cms routes
-const cmsRountesContainer = new CmsRoutesContainer(app);
-cmsRountesContainer.enableCms();
+const cmsRoutesContainer = new CmsRoutesContainer(app);
+cmsRoutesContainer.enableCms();
 
 app.listen(port, () => {
   console.log(`CMS app listening on port ${port}`);
