@@ -3,7 +3,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
-const cms = require('./routes/cms.routes');
+const home = require('./routes/home.routes');
+const CmsRoutesContainer = require('./routes/cms.routes.container');
 
 const app = express();
 const port = 3000;
@@ -55,7 +56,11 @@ app.use(
 );
 
 // home handler
-app.use(cms);
+app.use(home);
+
+// include cms routes
+const cmsRountesContainer = new CmsRoutesContainer(app);
+cmsRountesContainer.enableCms();
 
 app.listen(port, () => {
   console.log(`CMS app listening on port ${port}`);

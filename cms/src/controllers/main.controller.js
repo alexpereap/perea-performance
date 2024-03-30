@@ -11,7 +11,7 @@ const home = (req, res) => {
   }
   // goes to dashboard if an access token is available
   if (typeof req.session.accessToken !== 'undefined') {
-    return res.redirect('/dashboard');
+    return res.redirect('/cms/dashboard');
   }
 
   res.render('login', { loginError });
@@ -32,7 +32,7 @@ const login = async (req, res) => {
     const { accessToken } = response.data;
     req.session.accessToken = accessToken;
     // goes to dashboard
-    req.session.save(() => res.redirect('/dashboard'));
+    req.session.save(() => res.redirect('/cms/dashboard'));
   } catch (e) {
     let errMsg = `Unexpected error occured: ${e.message}`;
     if (e.hasOwnProperty('response') && e.response.status === 401) {

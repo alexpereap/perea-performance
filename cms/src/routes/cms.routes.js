@@ -2,18 +2,17 @@ const express = require('express');
 
 const router = express.Router();
 
-// controllers
-const { home, login } = require('../controllers/main.controller');
-const { dashboard } = require('../controllers/dashboard.controller');
-
-// middlewares
-const backendAuth = require('../middlewares/backend.auth.middleware');
-
-// main controller routes
-router.get('/', home);
-router.post('/login', login);
+const { dashboard } = require('../controllers/cms/dashboard.controller');
+const homeSlidesController = require('../controllers/cms/home_slides.controller');
 
 // dashboard routes
-router.get('/dashboard', backendAuth, dashboard);
+router.get(['/', '/dashboard'], dashboard);
+// end of dashboard routes
+
+// home slides routes
+
+router.get('/home-slides', homeSlidesController.list);
+
+// end of home slides routes
 
 module.exports = router;
