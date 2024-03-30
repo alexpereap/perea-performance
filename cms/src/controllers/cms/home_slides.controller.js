@@ -1,5 +1,5 @@
 const list = (req, res) => {
-  res.send('home slides list');
+  res.render('cms/home_slides/list');
 };
 
 module.exports = {
