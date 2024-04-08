@@ -14,6 +14,24 @@ module.exports = async (req, res, next) => {
         },
       },
     );
+
+    res.locals.cmsError = null;
+    res.locals.cmsSuccess = null;
+
+    // shows temporal error message on CMS
+    if (typeof (req.session.cmsError) !== 'undefined') {
+      res.locals.cmsError = req.session.cmsError;
+      delete req.session.cmsError;
+      return req.session.save(() => next());
+    }
+
+    // shows temporal success message on CMS
+    if (typeof (req.session.cmsSuccess) !== 'undefined') {
+      res.locals.cmsSuccess = req.session.cmsSuccess;
+      delete req.session.cmsSuccess;
+      return req.session.save(() => next());
+    }
+
     next();
   } catch (e) {
     req.session.loginError = e.message;

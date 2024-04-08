@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   HomeSlide.init({
     image: DataTypes.STRING,
     legend: DataTypes.STRING,
+    order: DataTypes.INTEGER,
     position: DataTypes.ENUM({
       values: ['none', 'left', 'right', 'top', 'bottom'],
     }),

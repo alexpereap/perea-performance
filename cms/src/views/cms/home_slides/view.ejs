@@ -1,0 +1,34 @@
+<%- include('../../partials/cms-main-header') -%>
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1>Home slides - Add</h1>
+    </div>
+    <div class="row">
+        <form method="POST">
+            <div class="mb-3">
+              <label for="legend" class="form-label">Legend</label>
+              <input type="text" class="form-control" id="legend" name="legend" value="<%= data.legend %>" >
+            </div>
+            <div class="mb-3">
+              <label for="image" class="form-label">Image Url</label>
+              <input type="text" class="form-control" id="image" name="image" value="<%= data.image %>" required>
+            </div>
+            <div class="mb-3">
+                <label for="order" class="form-label">Order</label>
+                <input type="number" min="0" max="10" class="form-control" id="order" name="order" value="<%= data.order %>" required>
+              </div>
+            <div class="mb-3">
+                <label for="position" class="form-label">Position</label>
+                <select name="position" id="position" class="form-select">
+                    <option value="none" <% if (data.position == 'none') { %> selected <% } %> >None</option>
+                    <option value="left" <% if (data.position == 'left') { %> selected <% } %> >Left</option>
+                    <option value="right" <% if (data.position == 'right') { %> selected <% } %> >Right</option>
+                    <option value="top" <% if (data.position == 'top') { %> selected <% } %> >Top</option>
+                    <option value="bottom" <% if (data.position == 'bottom') { %> selected <% } %> >Bottom</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</main>
+<%- include('../../partials/footer') -%>

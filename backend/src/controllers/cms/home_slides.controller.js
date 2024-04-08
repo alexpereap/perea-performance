@@ -9,7 +9,18 @@ const positionValues = HomeSlide.getAttributes().position.values;
 
 const getAll = async (req, res) => {
   try {
-    const homeSlides = await HomeSlide.findAll();
+    let { sortBy } = req.body;
+
+    // sort by optional param
+    sortBy = (typeof sortBy === 'undefined' || sortBy === '')
+      ? 'id'
+      : sortBy;
+
+    const homeSlides = await HomeSlide.findAll({
+      order: [
+        [sortBy, 'ASC'],
+      ],
+    });
     return res.status(201).json({
       data: homeSlides,
       success: true,
@@ -39,7 +50,9 @@ const getOne = async (req, res) => {
 
 const insert = async (req, res) => {
   try {
-    const { image, legend, position } = req.body;
+    const {
+      image, legend, position, order,
+    } = req.body;
     if (typeof image === 'undefined' || validator.isEmpty(image)) {
       throw new Error('\'image\' field is required');
     }
@@ -55,6 +68,7 @@ const insert = async (req, res) => {
     const homeSlide = await HomeSlide.create({
       image,
       legend,
+      order: order || 0,
       position: position || 'none',
     });
 
@@ -74,7 +88,7 @@ const update = async (req, res) => {
     }
 
     const {
-      image, legend, position,
+      image, legend, position, order,
     } = req.body;
     const { homeSlideId } = req.params;
 
@@ -104,8 +118,12 @@ const update = async (req, res) => {
       homeSlide.position = position;
     }
 
+    if (order) {
+      homeSlide.order = order;
+    }
+
     if (!homeSlide.changed()) {
-      throw new Error('Nothing is being updated in the record, make sure you are setting one of the following fields in the request: \'image\' \'legend\' \'position\'');
+      throw new Error('Nothing is being updated in the record, make sure you are setting one of the following fields in the request: \'image\' \'legend\' \'position\' \'order\'');
     }
 
     // updates model instance

@@ -1,7 +1,43 @@
 <%- include('../../partials/cms-main-header') -%>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1>Home slides LIST</h1>
+        <h1>Home slides - List</h1>
+    </div>
+    <div class="row">
+        <a href="/cms/home-slides/add" class="btn btn-primary" >Add</a>
+    </div>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Image</th>
+                    <th>Legend</th>
+                    <th>order</th>
+                    <th>Position</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% homeSlides.forEach((homeSlide, i) => { %>
+                <tr>
+                    <td><%= homeSlide.id %></td>
+                    <td><%= homeSlide.image %></td>
+                    <td><%= homeSlide.legend %></td>
+                    <td><%= homeSlide.order %></td>
+                    <td><%= homeSlide.position %></td>
+                    <td>
+                        <a class="me-2 float-start nav-link d-flex align-items-center gap-2 active" aria-current="page" href="/cms/home-slides/edit/<%= homeSlide.id %>" title="edit">
+                            <svg class="bi"><use xlink:href="#pencil-square"/></svg>
+                        </a>
+                        <a class="nav-link d-flex align-items-center gap-2 active delete-record" aria-current="page" href="/cms/home-slides/delete/<%= homeSlide.id %>" title="delete">
+                            <svg class="bi"><use xlink:href="#trash"/></svg>
+                        </a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
     </div>
 </main>
 <%- include('../../partials/footer') -%>

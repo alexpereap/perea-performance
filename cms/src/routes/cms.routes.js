@@ -13,6 +13,11 @@ router.get('/sign-out', dashboardController.signOut);
 // home slides routes
 
 router.get('/home-slides', homeSlidesController.list);
+router.get('/home-slides/add', homeSlidesController.add);
+router.post('/home-slides/add', homeSlidesController.postAdd);
+router.get('/home-slides/edit/:slideId', homeSlidesController.edit);
+router.post('/home-slides/edit/:slideId', homeSlidesController.update);
+router.get('/home-slides/delete/:slideId', homeSlidesController.deleteRecord);
 
 // end of home slides routes
 

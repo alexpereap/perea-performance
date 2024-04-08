@@ -1,3 +1,16 @@
 <script src="/js/bootstrap.bundle.min.js" ></script>
+<script>
+    const deleteElements = document.getElementsByClassName('delete-record');
+    const deleteElement = (e, t) => {
+        e.preventDefault();
+        if (confirm('Do you want to delete this record?')) {
+            const anchor = event.target.closest('a');
+            window.location.href = anchor.getAttribute('href');
+        }
+    }
+    for (let i = 0; i < deleteElements.length; i++) {
+        deleteElements[i].addEventListener('click', deleteElement, false);
+    }
+</script>
 </body>
 </html>

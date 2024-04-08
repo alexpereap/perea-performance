@@ -7,5 +7,15 @@
 <body>
 <%- include('body-header') -%>
 <div class="container-fluid">
+  <% if (cmsError) { %>
+    <div class="alert alert-danger mt-2 text-center" role="alert">
+        <%= cmsError %>
+    </div>
+  <% } %>
+  <% if (cmsSuccess) { %>
+    <div class="alert alert-success mt-2 text-center" role="alert">
+        <%= cmsSuccess %>
+    </div>
+  <% } %>
   <div class="row">
     <%- include('left-navbar') -%>
